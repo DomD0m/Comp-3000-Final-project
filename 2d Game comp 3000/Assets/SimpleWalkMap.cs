@@ -8,21 +8,21 @@ public class SimpleWalkMap : AbstractDungeon
 {
 
     [SerializeField]
-    private RandomWalkData randomWalkData;
+    protected RandomWalkData randomWalkData;
 
    protected override void RunGeneration()
     {
 
-        HashSet<Vector2Int> floorposition = runRandomwalk(randomWalkData);
+        HashSet<Vector2Int> floorposition = runRandomwalk(randomWalkData, startposition);
         tilemapvisual.clear();
          tilemapvisual.Paintfloortile(floorposition);
         WallGenerator.CreateWalls(floorposition, tilemapvisual);
         
     }
 
-    protected HashSet<Vector2Int> runRandomwalk(RandomWalkData Parameters)
+    protected HashSet<Vector2Int> runRandomwalk(RandomWalkData Parameters, Vector2Int position)
     {
-        var currentPosition = startposition;
+        var currentPosition = position;
         HashSet<Vector2Int> floorpositions = new HashSet<Vector2Int>();
         for (int i = 0; i < Parameters.iterations; i++)
         {
